@@ -151,6 +151,65 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-你必须要知道的几个css技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/12/05/你必须要知道的几个css技巧/">你必须要知道的几个css技巧</a>
+    </h1>
+  
+
+        
+        <a href="/2016/12/05/你必须要知道的几个css技巧/" class="archive-article-date">
+  	<time datetime="2016-12-05T09:02:23.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-12-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>有些经典的CSS技巧，我们还是需要记住的，这样可以节省我们大量的时间，下面零度就为大家推荐几个比较好的CSS技巧：</p>
+<p>1、在不同页面上使用同样的导航代码<br>许多网页上都有导航菜单，当进入某页时，菜单上相应这一项就应该变灰，而其他页亮起来。一般要实现这个效果，需要写程序或专门为每一页做设计，现在靠CSS就可以实现这个效果。</p>
+<p>首先，在导航代码中使用CSS类：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;ul&gt; </div><div class="line">&lt;li&gt;&lt;a href="#" class="home"&gt;首页&lt;/a&gt;&lt;/li&gt; </div><div class="line">&lt;li&gt;&lt;a href="#" class="about"&gt;关于我们&lt;/a&gt;&lt;/li&gt; </div><div class="line">&lt;li&gt;&lt;a href="#" class="contact"&gt;联系我们&lt;/a&gt;&lt;/li&gt; </div><div class="line">&lt;<span class="regexp">/ul&gt;</span></div></pre></td></tr></table></figure></p>
+<p>然后分别为每一页的Body指定一个id，和上面类同名。如<body id="home">。</body></p>
+<p>然后设计CSS如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#home .home, #about .about, #contact .contact </div><div class="line">&#123; </div><div class="line">commands for highlighted navigation go here </div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>这里，当id设为home时，.home就会起作用，也就是class设为home的那一行导航条就会显示出特殊效果来。其他页也是如此。</p>
+<p>怎么样，是不是很简单呢？</p>
+<p>2、Block和inline元素对比<br>所有的HTML元素都属于block和inline之一。block元素的特点是：<br>总是在新行上开始；<br>高度，行高以及顶和底边距都可控制；<br>宽度缺省是它的容器的100%，除非设定一个宽度</p>
+<p><div>, <p>, </p><h1>, <form>, <ul> 和 <li>是块元素的例子。相反地，inline元素的特点是：<br>和其他元素都在一行上；<br>高，行高及顶和底边距不可改变；<br>宽度就是它的文字或图片的宽度，不可改变。<br><span>, <a>, <label>, <input>, <img>, <strong> 和<em>是inline元素的例子。<br>用code class=”inline”&gt;display: inline 或display: block命令就可以改变一个元素的这一特性。什么时候需要改变这一属性呢？<br>让一个inline元素从新行开始；<br>让块元素和其他元素保持在一行上；<br>控制inline元素的宽度（对导航条特别有用）；<br>控制inline元素的高度；<br>无须设定宽度即可为一个块元素设定与文字同宽的背景色。</em></strong></label></a></span></li></ul></form></h1></div></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/12/05/你必须要知道的几个css技巧/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-走进javascript-不起眼的基础，值和分号" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
