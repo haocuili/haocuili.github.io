@@ -151,6 +151,78 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-走进javascript-不起眼的基础，值和分号" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/01/走进javascript-不起眼的基础，值和分号/">走进javascript---不起眼的基础，值和分号</a>
+    </h1>
+  
+
+        
+        <a href="/2016/08/01/走进javascript-不起眼的基础，值和分号/" class="archive-article-date">
+  	<time datetime="2016-07-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2016-08-01</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="值"><a href="#值" class="headerlink" title="值"></a>值</h2><p>有时我很想知道javascript解析引擎是如何区分一个变量的值，比如下面这段代码。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">ar x = <span class="string">'javascript'</span>; <span class="comment">//javascript</span></div><div class="line">x = <span class="string">"hello"</span>; <span class="comment">// hello</span></div><div class="line">x = <span class="number">555</span>; <span class="comment">//555</span></div><div class="line">x = <span class="literal">null</span>; <span class="comment">//null</span></div><div class="line">x = a; <span class="comment">//a is not defined</span></div><div class="line">x = <span class="literal">true</span>; <span class="comment">//true</span></div></pre></td></tr></table></figure></p>
+<p>对于数字是直接赋值的，因为它没有多样性，数字就是数字。但是对于值是英文的情况就很难区分了，因为在编程语言中，英文既可能是字符串，也可能是引用的另外一个变量。因此如何区分变量和字符串就显得格外重要，编程语言常常将字符串用引号括起来，从而达到区分变量和字符串的作用。有些语言比如java，它们还区分单引号和双引号，单引号括起来的是一个字符，而双引号括起来的才是字符串。但javascript并不区分字符和字符串，而是把它们都当作字符串，因此在javascript中单引号和双引号并没有什么区别。<br>虽然通过引号可以用来区分变量和字符串，但值往往也可能是一个关键字，比如上面那段代码我将x赋值为null，那么这些编程语言又是如何区分变量和关键字的呢？<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="literal">null</span> = <span class="number">123</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="literal">null</span>); <span class="comment">//Uncaught ReferenceError: Invalid left-hand side in assignment</span></div><div class="line"><span class="literal">undefined</span> = <span class="number">456</span>;</div><div class="line"><span class="built_in">console</span>.log(<span class="literal">undefined</span>); <span class="comment">//undefined</span></div></pre></td></tr></table></figure></p>
+<p>以上我给null和undefined分别赋给了另外一个值，其结果，给null赋值报错了，给undefined赋值虽然没有报错，但也没有成功。也许对于null和undefined来说，它们就是值。而变量则是寻找值。我们说javascript是如何区分变量和关键字，最终或许就变成了javascript是如何区分变量和值的</p>
+<h2 id="分号"><a href="#分号" class="headerlink" title="分号"></a>分号</h2><p>在一些JS插件中，经常会看到类似下面这样的一行代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">;(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"> .........</div><div class="line">&#125;)();</div></pre></td></tr></table></figure></p>
+<p>在代码的最前面有一个分号，那么这个分号是干什么用的呢？</p>
+<p>我们知道一个分号代表了一段代码的结束，但问题是javascript允许你不写分号，这样就出现了一个问题，代码的结束与否不是你来决定的而是由程序来决定的，而程序也不是万能的，往往它只是走的某个规则，而如果你写的这段代码和它的规则不符，最终的结果就有些不如人意了。</p>
+<p>以下是javascript对省略分号的解析规则<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a</div><div class="line">=</div><div class="line"><span class="number">1</span> + <span class="number">2</span></div><div class="line"><span class="built_in">console</span>.log(a) <span class="comment">//3</span></div></pre></td></tr></table></figure></p>
+<p>javascript解析器会将以上代码解析成<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">1</span> + <span class="number">2</span>;</div><div class="line"><span class="built_in">console</span>.log(a); <span class="comment">//3</span></div></pre></td></tr></table></figure></p>
+<p>如果javascript不给2后面添加分号将会无法解析下去，也可以这么说，如果遇到无法解析下去则javascript解析器会尝试给其添加一个分号，如果还是解析不了则报错。又比如下面这一段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> c = a + b</div><div class="line">(a + b).toString()</div><div class="line"></div><div class="line"><span class="comment">// b is not a function</span></div></pre></td></tr></table></figure></p>
+<p>它说b不是一个函数，也就是说以上这段代码很有可能解析成了下面这段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a = <span class="number">10</span>;</div><div class="line"><span class="keyword">var</span> b = <span class="number">5</span>;</div><div class="line"></div><div class="line"><span class="keyword">var</span> c = a + b(a + b).toString();</div></pre></td></tr></table></figure></p>
+<p>它把()当成了函数调用。也可以理解为javascript解析器会尽可能多的去匹配，但也有几个例外，它们是retrun、break、continue，当javascript解析器解析到这几个关键字时，它不会把换行后的内容当成是自身的，而是直接在换行之前添加分号，不妨看看下面这段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">test</span>(<span class="params"></span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> </div><div class="line">  <span class="number">123</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(test()); <span class="comment">//undefined</span></div></pre></td></tr></table></figure></p>
+<p>它并没有返回123，也就是说它直接在retrun后面加了分号。</p>
+<p>再回过头来看看，那些插件开发者为什么要在代码第一行添加一个分号？</p>
+<p>既然是插件，自然是给别人用的对吧，可关键问题是你也不清楚使用这个插件的人它的代码是如何编写的，这好像挺谬论的，它的代码和我们有什么关系呢。</p>
+<p>如果说使用者的代码会影响我们的代码，那么它又是如何影响的呢？比如我们正在编写类似下面这样的一段代码<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;script src=<span class="string">"test.js"</span>&gt;&lt;/script&gt;</div><div class="line">&lt;script src=<span class="string">"zmz.js"</span>&gt;&lt;/script&gt;</div></pre></td></tr></table></figure></p>
+<p>第一个脚本是使用者自己写的，第二个脚本是引入的某个插件，那么浏览器又是如何解析这两个脚本的呢？不妨我们来测试一下</p>
+<p>test.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a</div><div class="line">a</div></pre></td></tr></table></figure></p>
+<p>zmz.js<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(<span class="number">1</span>+<span class="number">2</span>)</div></pre></td></tr></table></figure></p>
+<p>如果你运行起来会发现并没有报错，也就是说javascript解析器并不会因为前面这个文件没有加分号而和后一个文件中的代码一起解析。</p>
+<p>问题倒不在这，而是有可能你刚刚看了一本关于HTTP的书，哇靠，原来把文件合并可以减少请求数，于是乎这两个脚本融为一体了。摇身一变成了下面这样<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a</div><div class="line">a(<span class="number">1</span>+<span class="number">2</span>)</div></pre></td></tr></table></figure></p>
+<p>你说这能不出错吗，如果我们在插件的一开始就加上分号，这种事情就不可能出现。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a</div><div class="line">a;(<span class="number">1</span>+<span class="number">2</span>)</div></pre></td></tr></table></figure></p>
+<p>因此不要把分号单单认为只是用来结束某段代码，它还可以用来隔离某段代码和别人划清界限。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2016/08/01/走进javascript-不起眼的基础，值和分号/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-jQuery-lazyLoad参数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
