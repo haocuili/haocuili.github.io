@@ -230,7 +230,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><p>部署服务器需要使用github，所以git成了必要工具<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install git</div></pre></td></tr></table></figure></p>
+        <ol>
+<li>在个人的 Github 账户中创建一个仓库</li>
+<li>仓库名称必须为 <code>个人账户名称.github.io</code></li>
+<li>往该仓库根目录中提交一个 <code>index.html</code> 文件</li>
+<li>然后就可以在地址栏输入 <code>个人账户名称.github.io</code> 地址，就可以看到 <code>index.html</code> 网页内容了</li>
+</ol>
+<p>注意：上面创建的仓库名称必须是 <code>个人账户名称.github.io</code> ，否则无法访问</p>
+<h2 id="Hexo"><a href="#Hexo" class="headerlink" title="Hexo"></a>Hexo</h2><p>Hexo 是基于 Node.js 开发的一个静态博客生成器，提供本地实时预览及部署功能。<br>基本使用方式如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo-cli</div><div class="line">hexo init blog</div><div class="line"><span class="built_in">cd</span> blog</div><div class="line"></div><div class="line"><span class="comment"># 启动本地预览服务，默认是 127.0.0.1:4000</span></div><div class="line">hexo server</div><div class="line"></div><div class="line"><span class="comment"># 新建文章</span></div><div class="line">hexo new 文章标题</div></pre></td></tr></table></figure>
+<p>也可以参考 Hexo 官方文档：<a href="https://hexo.io/zh-cn/" target="_blank" rel="external">https://hexo.io/zh-cn/</a> , 里面有具体的使用方式。</p>
+<h3 id="自动发布-Hexo-搭建的静态博客"><a href="#自动发布-Hexo-搭建的静态博客" class="headerlink" title="自动发布 Hexo 搭建的静态博客"></a>自动发布 Hexo 搭建的静态博客</h3><p>第一：先修改 <code>_config.yml</code> 配置文件，下面是一个示例：</p>
+<figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">  type:</span> git</div><div class="line"><span class="attr">  repo:</span> https://heima04:heima123456@github.com/heima04/heima04.github.io.git</div></pre></td></tr></table></figure>
+<p>上面的配置选项中，一定要注意在 repo 中按照对应的格式加入 Github 用户名和密码。</p>
+<p>第二：安装自动发布的插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure>
+<p>第三：使用命令一键进行发布：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo generate --deploy</div><div class="line"><span class="comment"># 或者</span></div><div class="line">hexo deploy --generate</div></pre></td></tr></table></figure>
+<p>上面两条命令都可以，发布可能有延时，稍微等待即可。</p>
 
       
 
